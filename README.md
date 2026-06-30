@@ -1,102 +1,201 @@
 # Senda
 
-Senda es una herramienta beta de pipeline local para organizar proyectos pequeños: escaneo de carpetas, estado general, revisión de renders, salidas a cliente, archivos de trabajo, launcher de aplicaciones y registro de tiempo.
+**Local pipeline for small creative projects. Beta version.**
 
-La herramienta funciona en local desde una interfaz web en `http://127.0.0.1:8765`. No necesita ShotGrid, ftrack ni servicios externos.
+[Español](#español) | [English](#english)
 
-## Requisitos
+---
+
+## English
+
+Senda is a local pipeline tool for managing small creative projects: folder scanning, project status, render review, client outputs, work files, application launching, time logs, backups, and basic billing.
+
+It runs locally from a web interface at:
+
+```text
+http://127.0.0.1:8765
+```
+
+Senda does not require ShotGrid, ftrack, or any external service.
+
+### Requirements
 
 - Windows.
-- Navegador web moderno.
-- Opcional: OpenRV, FFmpeg y las aplicaciones de trabajo que quieras abrir desde el Launcher.
+- A modern web browser.
+- Python 3.10 or later.
+- Optional: OpenRV, FFmpeg, and the creative applications you want to launch from Senda.
 
-OpenRV no es obligatorio para usar Senda, pero es recomendable si vas a revisar secuencias EXR/DPX, renders por versiones o salidas desde la interfaz. Se puede descargar desde las releases oficiales de Academy Software Foundation:
+OpenRV is optional, but recommended for reviewing EXR/DPX image sequences, render versions, and output files. You can download it from the official Academy Software Foundation releases:
 
 https://github.com/AcademySoftwareFoundation/OpenRV/releases
 
-Senda necesita Python 3.10 o superior para arrancar. Si no lo tienes instalado, descárgalo desde python.org y marca la opción de añadirlo al PATH durante la instalación.
+### Quick Start
 
-## Instalación rápida
+1. Download the latest Senda ZIP from the GitHub Releases page.
+2. Extract it to a folder, for example `C:\Senda`.
+3. Double-click `Senda.vbs` or `Senda.cmd`.
+4. Open `Home > Settings > General`.
+5. Set your projects folder.
+6. Save settings and click `Scan projects`.
 
-1. Descomprime el ZIP de Senda en una carpeta, por ejemplo `C:\Senda` o `D:\Herramientas\Senda`.
-2. Haz doble click en `Senda.vbs` o `Senda.cmd`.
-3. Se abrirá la interfaz en `http://127.0.0.1:8765`.
-4. Entra en `Inicio > Configuración > General` y define la carpeta de proyectos.
-5. Pulsa `Guardar y cerrar`.
-6. Vuelve a `Inicio` y pulsa `Escanear proyectos`.
+If you want to see what the local server is doing, open `Senda_consola.cmd`.
 
-Si quieres ver qué hace el servidor, abre `Senda_consola.cmd`. Esa ventana se puede cerrar con `Ctrl+C`.
+### Main Features
 
-## Archivos principales
+- Home dashboard with global project status, free disk space, warnings, launcher, and project size chart.
+- Sortable project list.
+- Project creation with configurable folder templates.
+- Project sheet with client, status, priority, notes, sequences, artists, and thumbnails.
+- Work tab for software files such as Nuke, Photoshop, Maya, Fusion, Unreal Engine, and more.
+- Review tab for internal renders from `Renders`, including image sequence grouping and version detection.
+- Output tab for client-facing files from `Output`, with shot status, notes, version selection, metadata, and player launch.
+- Global time logs with timer, manual entries, calendar, records, and analytics.
+- Billing and bids with clients, editable line items, taxes, templates, PDF, Excel, and CSV export.
+- Application launcher with detection and icons.
+- Full and project-level backups.
+- Updates from GitHub Releases.
 
-- `Senda.vbs`: lanzador silencioso.
-- `Senda.cmd`: lanzador alternativo para doble click.
-- `Senda_consola.cmd`: lanzador con consola visible.
-- `web_server.py`: servidor local.
-- `project_auditor.py`: escáner de proyectos.
-- `web/`: interfaz web.
-- `web/help.html`: documentación local.
-- `senda_settings.example.json`: ejemplo limpio de configuración.
+### Suggested Folder Structure
 
-## Primer uso
-
-Senda no escanea hasta que hay una carpeta de proyectos configurada. La ruta se define en `Configuración > General`.
-
-Al escanear, Senda genera datos locales en:
-
-- `reports/project_audit.json`
-- `reports/project_audit.csv`
-- `reports/project_tracker_status.csv`
-- `reports/review_queue.csv`
-- `project_tracker.csv`
-
-Estos archivos se crean automáticamente cuando escaneas tus proyectos por primera vez.
-
-## Funciones principales
-
-- Inicio con estado general, espacio libre, avisos, launcher y gráfico circular de ocupación por proyecto.
-- Lista lateral de proyectos ordenable por recientes, nombre o tamaño.
-- Creación de proyectos con estructura base y carpetas por software.
-- Edición de proyecto para añadir carpetas nuevas sin borrar nada existente.
-- Ficha de proyecto con cliente, prioridad, estado, responsable, deadline, versión, notas y miniaturas.
-- Secuencias editables por proyecto.
-- Pestaña Trabajo con archivos de software agrupados por aplicación.
-- Pestaña Revisión para renders internos desde `Renders`, agrupando secuencias de imagen como un solo render y detectando versiones `v001`, `v002`, etc.
-- Pestaña Salida para archivos de `Output`, con estado de plano, notas, secuencia, versión y apertura en reproductor compatible.
-- Registro de tiempo global con contador, edición de registros, calendario y analíticas.
-- Facturación y presupuestos con clientes, líneas editables, impuestos, plantillas, PDF, Excel y CSV.
-- Launcher global con detección de aplicaciones e iconos.
-- Copias de seguridad completas o por proyecto.
-- Actualizaciones desde GitHub Releases o manifest HTTPS.
-- Panel Ayuda con documentación y Acerca de Senda.
-
-## Configuración
-
-Los ajustes globales se guardan en `senda_settings.json`, que se crea al guardar configuración desde la interfaz.
-
-Apartados principales:
-
-- `General`: idioma, tema, color de acento y carpeta de proyectos.
-- `Rutas`: OpenRV y reproductor para Salida.
-- `Launcher`: aplicaciones visibles en Inicio, ruta e icono.
-- `Escaneo`: umbrales de actividad, proyecto pesado y caché alto.
-- `Copia de seguridad`: exportación completa, exportación por proyecto e importación.
-- `Actualizaciones`: repositorio de GitHub, manifest opcional, canal estable/beta y comprobación al abrir.
-- `Servidor`: limpiar caché y cerrar servidor.
-
-El botón `Cancelar` cierra Configuración sin guardar. El botón `Guardar y cerrar` guarda y cierra el panel.
-
-## OpenRV y secuencias
-
-Si defines OpenRV, Senda puede abrir renders y salidas desde la interfaz. Es una herramienta opcional: Senda puede escanear proyectos, gestionar fichas, salidas, launcher y registros de tiempo sin OpenRV, pero la revisión de secuencias será más completa si está instalado.
-
-Después de instalarlo, define la ruta a `rv.exe` en `Configuración > Rutas`. Suele estar en una carpeta parecida a:
+Senda works best when each project uses a clear folder structure:
 
 ```text
-C:\OpenRV...\app\bin\rv.exe
+ProjectName/
+  Source/
+  Renders/
+  Output/
+  Nuke/
+  Maya/
+  Fusion/
+  Photoshop/
+  AfterEffects/
 ```
 
-Las secuencias de imagen se tratan como un único render. Por ejemplo:
+`Renders` is intended for internal review versions. `Output` is intended for client-facing exports or final deliveries. Keeping those folders separate helps Senda catalogue the project correctly.
+
+### Image Sequences and Versions
+
+Image sequences are treated as one render, not as hundreds of individual files. Version names such as `v001`, `v002`, `v003` help Senda group renders by shot and version.
+
+Example:
+
+```text
+Shot01_v001_1001.exr
+Shot01_v001_1002.exr
+Shot01_v001_1003.exr
+```
+
+### Local Data and Backups
+
+Senda stores settings, project sheets, shots, sequences, artists, time logs, clients, and invoices locally inside the Senda folder.
+
+Before moving Senda to another computer, reinstalling it, or testing an important update, create a backup from:
+
+```text
+Settings > Backup
+```
+
+### Updates
+
+Senda can check GitHub for new versions from:
+
+```text
+Settings > Updates
+```
+
+For this beta, use:
+
+```text
+Repository: Ekaiadesign/Senda
+Channel: Beta
+```
+
+When a newer version is available, Senda can download it and start the installer from inside the app.
+
+### Billing Notice
+
+Senda helps prepare invoices and bids, but it is not legal or tax advice. Always check the fiscal requirements for your country or region before sending an invoice.
+
+### Credits
+
+Created by Edu León.
+
+Ekaiadesign.com
+
+---
+
+## Español
+
+Senda es una herramienta de pipeline local para administrar pequeños proyectos creativos: escaneo de carpetas, estado de proyectos, revisión de renders, salidas a cliente, archivos de trabajo, launcher de aplicaciones, registro de tiempo, copias de seguridad y facturación básica.
+
+Funciona en local desde una interfaz web en:
+
+```text
+http://127.0.0.1:8765
+```
+
+Senda no necesita ShotGrid, ftrack ni servicios externos.
+
+### Requisitos
+
+- Windows.
+- Un navegador web moderno.
+- Python 3.10 o superior.
+- Opcional: OpenRV, FFmpeg y las aplicaciones de trabajo que quieras abrir desde Senda.
+
+OpenRV no es obligatorio, pero es recomendable para revisar secuencias EXR/DPX, versiones de renders y archivos de salida. Puedes descargarlo desde las releases oficiales de Academy Software Foundation:
+
+https://github.com/AcademySoftwareFoundation/OpenRV/releases
+
+### Primer Arranque
+
+1. Descarga el ZIP más reciente de Senda desde la página de Releases de GitHub.
+2. Descomprímelo en una carpeta, por ejemplo `C:\Senda`.
+3. Haz doble click en `Senda.vbs` o `Senda.cmd`.
+4. Abre `Inicio > Configuración > General`.
+5. Define tu carpeta de proyectos.
+6. Guarda los ajustes y pulsa `Escanear proyectos`.
+
+Si quieres ver qué está haciendo el servidor local, abre `Senda_consola.cmd`.
+
+### Funciones Principales
+
+- Inicio con estado general, espacio libre, avisos, launcher y gráfico de ocupación por proyecto.
+- Lista de proyectos ordenable.
+- Creación de proyectos con plantillas de carpetas.
+- Ficha de proyecto con cliente, estado, prioridad, notas, secuencias, artistas y miniaturas.
+- Pestaña Trabajo para archivos de software como Nuke, Photoshop, Maya, Fusion, Unreal Engine y más.
+- Pestaña Revisión para renders internos desde `Renders`, agrupando secuencias de imagen y detectando versiones.
+- Pestaña Salida para archivos destinados a cliente desde `Output`, con estado de plano, notas, versiones, metadata y apertura en reproductor.
+- Registro de tiempo global con contador, registros manuales, calendario y analíticas.
+- Facturación y presupuestos con clientes, líneas editables, impuestos, plantillas y exportación a PDF, Excel y CSV.
+- Launcher de aplicaciones con detección e iconos.
+- Copias de seguridad completas o por proyecto.
+- Actualizaciones desde GitHub Releases.
+
+### Estructura Recomendada
+
+Senda funciona mejor cuando cada proyecto mantiene una estructura clara:
+
+```text
+NombreProyecto/
+  Source/
+  Renders/
+  Output/
+  Nuke/
+  Maya/
+  Fusion/
+  Photoshop/
+  AfterEffects/
+```
+
+`Renders` está pensado para versiones internas de revisión. `Output` está pensado para archivos enviados al cliente o entregas finales. Mantener esas carpetas separadas ayuda a que Senda catalogue el proyecto correctamente.
+
+### Secuencias y Versiones
+
+Las secuencias de imagen se tratan como un solo render, no como cientos de archivos independientes. Los nombres de versión como `v001`, `v002`, `v003` ayudan a Senda a agrupar renders por plano y versión.
+
+Ejemplo:
 
 ```text
 Plano01_v001_1001.exr
@@ -104,75 +203,38 @@ Plano01_v001_1002.exr
 Plano01_v001_1003.exr
 ```
 
-se catalogan como una secuencia completa y se envían a OpenRV con patrón de secuencia, no como un único frame.
+### Datos Locales y Copias
 
-## Miniaturas
+Senda guarda configuración, fichas, planos, secuencias, artistas, registros de tiempo, clientes y facturas de forma local dentro de la carpeta de Senda.
 
-Las miniaturas solo se generan si el proyecto tiene activado `Generar miniaturas` en su Ficha.
+Antes de mover Senda a otro equipo, reinstalarla o probar una actualización importante, crea una copia desde:
 
-Requieren FFmpeg disponible en el sistema. Se guardan dentro de `cache/thumbnails`, y se eliminan al usar `Limpiar caché`.
+```text
+Configuración > Copia de seguridad
+```
 
-## Facturación
+### Actualizaciones
 
-El área de Facturación permite crear facturas y presupuestos a partir de líneas manuales, datos de proyecto y registros de tiempo. Los documentos se pueden exportar a PDF, Excel o CSV.
+Senda puede comprobar nuevas versiones en GitHub desde:
 
-Antes de emitir documentos reales, revisa:
-
-- Tus datos profesionales en `Facturación > Datos y fiscalidad`.
-- Cliente, moneda, idioma del documento y estado.
-- Líneas, cantidades, unidades, precios e impuestos.
-- Plantilla visual y color de plantilla.
-- Totales, notas y condiciones de pago.
-
-Senda ayuda a preparar documentos, pero no sustituye asesoría fiscal o legal. Comprueba siempre los requisitos de tu país o región antes de enviar una factura.
-
-## Copias de seguridad
-
-En `Configuración > Copia de seguridad` puedes exportar:
-
-- Una copia completa de datos de Senda.
-- Una copia parcial de un proyecto concreto.
-
-Las copias por proyecto sirven para archivar junto a la carpeta del proyecto información como ficha, planos, secuencias, artistas, registros de tiempo y facturación relacionada.
-
-## Actualizaciones desde GitHub
-
-Senda puede comprobar si hay nuevas versiones publicadas en GitHub desde `Configuración > Actualizaciones`.
+```text
+Configuración > Actualizaciones
+```
 
 Para esta beta, usa:
 
-- `Repositorio GitHub`: `Ekaiadesign/Senda`
-- `Canal`: `Beta`
-
-Cuando haya una versión nueva, Senda mostrará el aviso y permitirá descargarla e iniciar la instalación desde la propia aplicación.
-
-## Datos locales
-
-Senda guarda la configuración, fichas, planos, secuencias, artistas, registros de tiempo, clientes y facturas en archivos locales dentro de la carpeta donde está instalada la herramienta.
-
-Antes de mover Senda a otro equipo, reinstalarla o probar una actualización importante, es recomendable crear una copia desde `Configuración > Copia de seguridad`.
-
-## Uso por consola
-
-Escaneo manual:
-
-```powershell
-.\run_scan.ps1 -Root "D:\Proyectos"
+```text
+Repositorio: Ekaiadesign/Senda
+Canal: Beta
 ```
 
-Arranque manual del servidor:
+Cuando haya una versión nueva, Senda podrá descargarla e iniciar la instalación desde la propia aplicación.
 
-```powershell
-.\run_web.ps1
-```
+### Aviso Sobre Facturación
 
-Si PowerShell bloquea scripts, usa:
+Senda ayuda a preparar facturas y presupuestos, pero no sustituye asesoría legal o fiscal. Comprueba siempre los requisitos de tu país o región antes de enviar una factura.
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\run_web.ps1
-```
-
-## Créditos
+### Créditos
 
 Creado por Edu León.
 
