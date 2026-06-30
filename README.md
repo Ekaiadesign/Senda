@@ -14,7 +14,7 @@ OpenRV no es obligatorio para usar Senda, pero es recomendable si vas a revisar 
 
 https://github.com/AcademySoftwareFoundation/OpenRV/releases
 
-Este ZIP limpio no incluye Python. Para arrancar Senda, instala Python 3.10 o superior desde python.org y marca la opción de añadirlo al PATH, o añade una carpeta `python` junto a Senda con `python.exe`/`pythonw.exe` si preparas una edición portable completa.
+Senda necesita Python 3.10 o superior para arrancar. Si no lo tienes instalado, descárgalo desde python.org y marca la opción de añadirlo al PATH durante la instalación.
 
 ## Instalación rápida
 
@@ -50,7 +50,7 @@ Al escanear, Senda genera datos locales en:
 - `reports/review_queue.csv`
 - `project_tracker.csv`
 
-Estos archivos se pueden regenerar. El ZIP limpio no incluye reportes ni cachés de una máquina concreta.
+Estos archivos se crean automáticamente cuando escaneas tus proyectos por primera vez.
 
 ## Funciones principales
 
@@ -137,49 +137,20 @@ Las copias por proyecto sirven para archivar junto a la carpeta del proyecto inf
 
 ## Actualizaciones desde GitHub
 
-En `Configuración > Actualizaciones` puedes indicar:
+Senda puede comprobar si hay nuevas versiones publicadas en GitHub desde `Configuración > Actualizaciones`.
 
-- `Repositorio GitHub`: formato `owner/repositorio`.
-- `URL de manifest opcional`: JSON HTTPS propio, con prioridad sobre GitHub Releases.
-- `Canal`: `Estable` usa la última release estable; `Beta` puede leer pre-releases.
-- `Comprobar al abrir Senda`: avisa si hay una versión nueva.
+Para esta beta, usa:
 
-Para publicar una versión:
+- `Repositorio GitHub`: `Ekaiadesign/Senda`
+- `Canal`: `Beta`
 
-1. Prepara una release limpia de Senda.
-2. Sube a GitHub una Release con etiqueta comparable, por ejemplo `v0.2.0-beta`.
-3. Adjunta el ZIP limpio de Senda como asset de la Release. El ZIP debe incluir `Instalar Senda.exe` junto al resto de archivos de la herramienta.
-4. En Senda, pulsa `Comprobar actualizaciones`.
-
-Senda compara la versión instalada con la etiqueta publicada. Si hay una versión mayor y existe un asset descargable, activa `Descargar e instalar`. La descarga se guarda en `cache/updates`; si es un ZIP, Senda lo extrae y lanza el instalador incluido.
+Cuando haya una versión nueva, Senda mostrará el aviso y permitirá descargarla e iniciar la instalación desde la propia aplicación.
 
 ## Datos locales
 
-Estos archivos son datos de trabajo y no forman parte de una instalación limpia:
+Senda guarda la configuración, fichas, planos, secuencias, artistas, registros de tiempo, clientes y facturas en archivos locales dentro de la carpeta donde está instalada la herramienta.
 
-- `senda_settings.json`
-- `project_tracker.csv`
-- `project_shots.csv`
-- `project_sequences.csv`
-- `project_artists.csv`
-- `project_time_logs.csv`
-- `project_billing.csv`
-- `billing_clients.csv`
-- `billing_settings.json`
-- `billing_assets/`
-- `reports/`
-- `cache/`
-- `output/`
-- `tmp/`
-- `__pycache__/`
-
-Para instalar Senda en otro equipo desde cero, usa el ZIP limpio y configura la carpeta de proyectos desde la interfaz.
-
-## Release limpia
-
-Una release limpia debe incluir la aplicación, documentación, assets, ejecutables, instalador y ejemplos de configuración. No debe incluir datos personales, cachés, reportes, backups, facturas generadas ni rutas de una máquina concreta.
-
-El paquete publicable se debe subir a GitHub como asset de una Release. Para la versión actual, lo más fiable es publicar el ZIP limpio completo, porque el instalador necesita estar junto al resto de archivos de Senda.
+Antes de mover Senda a otro equipo, reinstalarla o probar una actualización importante, es recomendable crear una copia desde `Configuración > Copia de seguridad`.
 
 ## Uso por consola
 
